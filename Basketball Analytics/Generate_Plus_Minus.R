@@ -30,10 +30,12 @@ kGame <- pbp_sample$Game_id[1]
 players_start <- game_lineup[Game_id == kGame & Period == 1]
   
 ex_game_period <- pbp_sample[Game_id == kGame & Period == 1] %>% 
-  .[Event_Msg_Type %in% c(1, 3, 4, 5, 8)]
+  .[Event_Msg_Type %in% c(1, 3, 
+                          # 4, 5, # Rebound & Turnover, can be used to calculate possessions
+                          8)]
 
 
-players <- unique(game_period$Person1)
+players <- unique(ex_game_period$Perszon1)
 stint <- data.table(matrix(nrow = 0, ncol = length(players)))
 names(stint) <- players
 
